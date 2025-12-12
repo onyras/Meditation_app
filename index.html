@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Beautiful Mind — Nikolas Konstantin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,21 +12,18 @@
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <style>
     :root {
-      --black: #000000;
+      --black: #0a0a0a;
+      --white: #ffffff;
       --off-white: #F7F3ED;
       --blue: #7FABC8;
-      --blue-dark: #5a8eb5;
+      --blue-dark: #2a4a5e;
       --green: #A6BEA4;
-      --green-dark: #8aa888;
+      --green-dark: #3d4a3c;
       --yellow: #C6A55B;
       --orange: #E08F6A;
       --lilac: #C7B9D3;
-      --lilac-dark: #a89bba;
-      
-      --bg: var(--off-white);
-      --text: var(--black);
-      --text-muted: rgba(0, 0, 0, 0.45);
-      --text-light: rgba(0, 0, 0, 0.2);
+      --lilac-dark: #4a4252;
+      --text-muted: rgba(255,255,255,0.6);
     }
 
     * {
@@ -35,26 +32,13 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      background: var(--off-white);
+      color: var(--black);
       min-height: 100vh;
       min-height: 100dvh;
       -webkit-font-smoothing: antialiased;
-    }
-
-    *:focus {
-      outline: 2px solid var(--blue);
-      outline-offset: 2px;
-    }
-
-    *:focus:not(:focus-visible) {
-      outline: none;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -64,312 +48,143 @@
       }
     }
 
-    /* ==================== */
-    /* LAYOUT */
-    /* ==================== */
-    .app {
+    .view {
+      display: none;
       min-height: 100vh;
       min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
     }
 
-    .container {
+    .view.active {
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==================== */
+    /* HOME VIEW */
+    /* ==================== */
+    .home-view {
+      padding: 40px 20px;
       max-width: 480px;
       margin: 0 auto;
       width: 100%;
-      padding: 0 24px;
-    }
-
-    /* ==================== */
-    /* HEADER */
-    /* ==================== */
-    .header {
-      padding: 32px 0;
-      text-align: center;
     }
 
     .brand {
       font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    /* ==================== */
-    /* HERO */
-    /* ==================== */
-    .hero {
+      color: rgba(0,0,0,0.4);
       text-align: center;
-      padding: 24px 0 48px;
+      margin-bottom: 24px;
     }
 
     .hero-title {
-      font-size: 44px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero-title h1 {
+      font-size: 42px;
       font-weight: 300;
       letter-spacing: -0.03em;
-      line-height: 1.05;
-      margin-bottom: 12px;
+      line-height: 1.1;
+      margin-bottom: 8px;
     }
 
-    .hero-title span {
-      display: block;
-    }
-
-    .hero-subtitle {
+    .hero-title p {
       font-size: 14px;
-      font-weight: 400;
-      color: var(--text-muted);
+      color: rgba(0,0,0,0.5);
     }
 
-    /* ==================== */
-    /* PILLARS */
-    /* ==================== */
+    /* Pillar Cards - Album Art Style */
     .pillars {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      padding-bottom: 40px;
+      margin-bottom: 48px;
     }
 
-    .pillar {
-      background: #fff;
-      border-radius: 24px;
+    .pillar-card {
+      position: relative;
+      border-radius: 28px;
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.3s ease;
       border: none;
       width: 100%;
-      text-align: left;
+      height: 200px;
       font-family: inherit;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .pillar:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    .pillar-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
     }
 
-    .pillar:active {
-      transform: translateY(-2px);
+    .pillar-card:active {
+      transform: scale(0.98);
     }
 
-    /* ==================== */
-    /* PILLAR ARTWORK - Japanese Landscapes */
-    /* ==================== */
-    .pillar-artwork {
-      height: 160px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* AWARENESS - Ocean sunrise */
-    .artwork-awareness {
-      background: linear-gradient(180deg, 
-        #5a8eb5 0%, 
-        var(--blue) 40%, 
-        #a8cce0 70%,
-        var(--off-white) 100%
-      );
-    }
-
-    .artwork-awareness .sun {
+    .pillar-bg {
       position: absolute;
-      width: 70px;
-      height: 70px;
-      background: var(--orange);
-      border-radius: 50%;
-      top: 30px;
-      right: 25%;
-      opacity: 0.9;
+      inset: 0;
+      width: 100%;
+      height: 100%;
     }
 
-    .artwork-awareness .sun::after {
-      content: '';
+    .pillar-bg svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .pillar-overlay {
       position: absolute;
-      width: 90px;
-      height: 90px;
-      background: var(--orange);
-      border-radius: 50%;
-      top: -10px;
-      left: -10px;
-      opacity: 0.3;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%);
     }
 
-    .artwork-awareness .water {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 50px;
-      background: linear-gradient(180deg,
-        rgba(255,255,255,0.1) 0%,
-        rgba(255,255,255,0.3) 100%
-      );
-    }
-
-    .artwork-awareness .reflection {
-      position: absolute;
-      bottom: 10px;
-      right: calc(25% + 5px);
-      width: 60px;
-      height: 30px;
-      background: linear-gradient(180deg, 
-        rgba(224, 143, 106, 0.4) 0%,
-        rgba(224, 143, 106, 0) 100%
-      );
-      border-radius: 50%;
-      filter: blur(8px);
-    }
-
-    /* CULTIVATION - Mountains */
-    .artwork-cultivation {
-      background: linear-gradient(180deg, 
-        #8aa888 0%, 
-        var(--green) 50%,
-        #c4d4c3 100%
-      );
-    }
-
-    .artwork-cultivation .mountain-back {
-      position: absolute;
-      bottom: 0;
-      left: -20%;
-      width: 0;
-      height: 0;
-      border-left: 140px solid transparent;
-      border-right: 140px solid transparent;
-      border-bottom: 120px solid rgba(0,0,0,0.1);
-    }
-
-    .artwork-cultivation .mountain-front {
-      position: absolute;
-      bottom: 0;
-      right: -10%;
-      width: 0;
-      height: 0;
-      border-left: 120px solid transparent;
-      border-right: 120px solid transparent;
-      border-bottom: 100px solid rgba(255,255,255,0.25);
-    }
-
-    .artwork-cultivation .mountain-mid {
-      position: absolute;
-      bottom: 0;
-      left: 30%;
-      width: 0;
-      height: 0;
-      border-left: 100px solid transparent;
-      border-right: 100px solid transparent;
-      border-bottom: 80px solid rgba(255,255,255,0.15);
-    }
-
-    .artwork-cultivation .sun {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background: var(--off-white);
-      border-radius: 50%;
-      top: 25px;
-      left: 30%;
-      opacity: 0.7;
-    }
-
-    /* REFLECTION - Night moon */
-    .artwork-reflection {
-      background: linear-gradient(180deg, 
-        #a89bba 0%, 
-        var(--lilac) 40%,
-        #d8cfe3 80%,
-        var(--off-white) 100%
-      );
-    }
-
-    .artwork-reflection .moon {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      background: var(--off-white);
-      border-radius: 50%;
-      top: 30px;
-      left: 30%;
-      opacity: 0.9;
-      box-shadow: 0 0 40px rgba(247, 243, 237, 0.5);
-    }
-
-    .artwork-reflection .cloud {
-      position: absolute;
-      background: rgba(255,255,255,0.3);
-      border-radius: 50px;
-    }
-
-    .artwork-reflection .cloud-1 {
-      width: 80px;
-      height: 8px;
-      top: 50px;
-      right: 20%;
-    }
-
-    .artwork-reflection .cloud-2 {
-      width: 60px;
-      height: 6px;
-      top: 70px;
-      right: 30%;
-    }
-
-    .artwork-reflection .cloud-3 {
-      width: 100px;
-      height: 8px;
-      bottom: 50px;
-      left: 10%;
-    }
-
-    .artwork-reflection .hills {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 40px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 100% 100% 0 0;
-    }
-
-    /* ==================== */
-    /* PILLAR CONTENT */
-    /* ==================== */
     .pillar-content {
-      padding: 20px 24px 24px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      color: white;
+      text-align: left;
     }
 
-    .pillar-name {
-      font-size: 20px;
+    .pillar-subtitle {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 4px;
+    }
+
+    .pillar-title {
+      font-size: 28px;
       font-weight: 600;
       letter-spacing: -0.02em;
       margin-bottom: 4px;
-      color: var(--text);
-    }
-
-    .pillar-meta {
-      font-size: 13px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
 
     .pillar-count {
       font-size: 12px;
-      color: var(--text-light);
-      font-weight: 500;
+      opacity: 0.5;
     }
 
-    /* ==================== */
-    /* FOUNDATIONS */
-    /* ==================== */
+    /* Foundations */
     .foundations-section {
-      padding: 32px 0 48px;
-      border-top: 1px solid var(--text-light);
+      text-align: center;
     }
 
     .section-label {
@@ -377,9 +192,8 @@
       font-weight: 500;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--text-light);
+      color: rgba(0,0,0,0.3);
       margin-bottom: 16px;
-      text-align: center;
     }
 
     .foundations-list {
@@ -390,118 +204,126 @@
     }
 
     .foundation-btn {
-      background: transparent;
-      border: 1px solid var(--text-light);
+      background: var(--black);
+      border: none;
       border-radius: 100px;
       padding: 12px 20px;
       font-size: 13px;
-      font-weight: 400;
-      color: var(--text-muted);
+      font-weight: 500;
+      color: white;
       cursor: pointer;
       transition: all 0.2s ease;
       font-family: inherit;
     }
 
     .foundation-btn:hover {
-      border-color: var(--orange);
-      color: var(--orange);
-    }
-
-    /* ==================== */
-    /* FOOTER */
-    /* ==================== */
-    .footer {
-      padding: 24px 0 32px;
-      text-align: center;
-    }
-
-    .footer-text {
-      font-size: 11px;
-      color: var(--text-light);
-      letter-spacing: 0.03em;
-    }
-
-    /* ==================== */
-    /* VIEWS */
-    /* ==================== */
-    .view {
-      display: none;
-    }
-
-    .view.active {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      min-height: 100dvh;
-      animation: fadeIn 0.35s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      background: var(--blue-dark);
+      transform: translateY(-2px);
     }
 
     /* ==================== */
     /* LIST VIEW */
     /* ==================== */
-    .list-header {
-      padding: 24px 0;
-      display: flex;
-      align-items: center;
-      gap: 16px;
+    .list-view {
+      background: var(--off-white);
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
     }
 
-    .back-btn {
+    .list-header {
+      position: relative;
+    }
+
+    .list-hero-image {
+      width: 100%;
+      height: 280px;
+      position: relative;
+    }
+
+    .list-hero-image svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .list-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--off-white) 0%, transparent 40%);
+    }
+
+    .list-back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
       width: 44px;
       height: 44px;
-      background: #fff;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: none;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
-      flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      z-index: 10;
+      transition: background 0.2s ease;
     }
 
-    .back-btn:hover {
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    .list-back-btn:hover {
+      background: rgba(255,255,255,0.4);
     }
 
-    .back-btn svg {
-      width: 18px;
-      height: 18px;
-      stroke: var(--text);
+    .list-back-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: white;
       stroke-width: 2;
       fill: none;
     }
 
-    .list-title {
-      font-size: 28px;
-      font-weight: 500;
-      letter-spacing: -0.02em;
+    .list-title-section {
+      padding: 0 24px 24px;
+      margin-top: -60px;
+      position: relative;
+      z-index: 5;
     }
 
-    .list-artwork-small {
-      width: 100%;
-      height: 120px;
-      border-radius: 20px;
-      margin-bottom: 32px;
-      position: relative;
-      overflow: hidden;
+    .list-subtitle {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+      margin-bottom: 4px;
+    }
+
+    .list-title {
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .list-count {
+      font-size: 13px;
+      color: rgba(0,0,0,0.4);
+    }
+
+    .list-main {
+      padding: 0 24px 48px;
     }
 
     .meditation-list {
       list-style: none;
-      padding-bottom: 48px;
     }
 
     .meditation-item {
       display: flex;
       align-items: center;
-      padding: 18px 0;
+      padding: 16px 0;
       cursor: pointer;
       transition: all 0.2s ease;
       border: none;
@@ -509,7 +331,7 @@
       width: 100%;
       text-align: left;
       font-family: inherit;
-      border-bottom: 1px solid var(--text-light);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
     .meditation-item:hover {
@@ -517,27 +339,35 @@
     }
 
     .meditation-number {
-      width: 32px;
-      font-size: 12px;
+      width: 28px;
+      font-size: 13px;
       font-weight: 500;
-      color: var(--text-light);
+      color: rgba(0,0,0,0.25);
       flex-shrink: 0;
     }
 
     .meditation-info {
       flex: 1;
+      min-width: 0;
     }
 
     .meditation-title {
       font-size: 16px;
-      font-weight: 400;
-      color: var(--text);
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 2px;
+    }
+
+    .meditation-subtitle {
+      font-size: 12px;
+      color: rgba(0,0,0,0.4);
     }
 
     .meditation-duration {
       font-size: 12px;
-      color: var(--text-muted);
+      color: rgba(0,0,0,0.35);
       margin-left: 16px;
+      flex-shrink: 0;
     }
 
     /* ==================== */
@@ -547,48 +377,46 @@
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: var(--bg);
-    }
-
-    .player-view.active {
-      display: flex;
+      background: var(--off-white);
     }
 
     .player-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
       max-width: 480px;
       margin: 0 auto;
       width: 100%;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     .player-header {
-      padding: 24px;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .player-back-btn {
       width: 44px;
       height: 44px;
-      background: #fff;
+      background: rgba(0,0,0,0.05);
       border: none;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: background 0.2s ease;
     }
 
     .player-back-btn:hover {
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      background: rgba(0,0,0,0.1);
     }
 
     .player-back-btn svg {
-      width: 18px;
-      height: 18px;
-      stroke: var(--text);
+      width: 20px;
+      height: 20px;
+      stroke: var(--black);
       stroke-width: 2;
       fill: none;
     }
@@ -598,41 +426,119 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       padding: 0 24px 48px;
     }
 
+    /* Player Artwork - Large rounded bottom like reference */
     .player-artwork {
-      width: 260px;
-      height: 260px;
-      border-radius: 28px;
-      position: relative;
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1;
+      border-radius: 0 0 160px 160px;
       overflow: hidden;
-      margin-bottom: 40px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      margin-bottom: 32px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+      position: relative;
     }
 
+    .player-artwork svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .player-artwork-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 50%);
+    }
+
+    /* Animated Title */
     .player-info {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 48px;
+      width: 100%;
     }
 
     .player-pillar-name {
       font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: rgba(0,0,0,0.4);
       margin-bottom: 8px;
     }
 
-    .player-title {
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: -0.01em;
-      color: var(--text);
+    .player-title-wrapper {
+      position: relative;
+      overflow: hidden;
+      padding: 8px 0;
     }
 
+    .player-title {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* Animated breathing circle */
+    .breathing-circle {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: breathe 4s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes breathe {
+      0%, 100% { 
+        transform: scale(1);
+        opacity: 0.7;
+      }
+      50% { 
+        transform: scale(1.5);
+        opacity: 1;
+      }
+    }
+
+    /* Animated wave line */
+    .wave-line {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 3px;
+    }
+
+    .wave-line svg {
+      width: 100%;
+      height: 20px;
+    }
+
+    .wave-path {
+      fill: none;
+      stroke: var(--blue);
+      stroke-width: 2;
+      stroke-linecap: round;
+      animation: wave 2s ease-in-out infinite;
+    }
+
+    @keyframes wave {
+      0%, 100% {
+        d: path("M0,10 Q30,10 60,10 T120,10");
+      }
+      50% {
+        d: path("M0,10 Q30,5 60,10 T120,10");
+      }
+    }
+
+    /* Controls */
     .player-controls {
       width: 100%;
       max-width: 320px;
@@ -642,80 +548,84 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 36px;
+      gap: 24px;
       margin-bottom: 40px;
     }
 
     .skip-btn {
-      width: 48px;
-      height: 48px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      transition: color 0.2s ease;
-    }
-
-    .skip-btn:hover {
-      color: var(--text);
-    }
-
-    .skip-btn svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .play-button {
-      width: 72px;
-      height: 72px;
-      background: var(--text);
+      width: 56px;
+      height: 56px;
+      background: rgba(0,0,0,0.05);
       border: none;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s ease;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      color: var(--black);
+      transition: all 0.2s ease;
     }
 
-    .play-button:hover {
+    .skip-btn:hover {
+      background: rgba(0,0,0,0.1);
       transform: scale(1.05);
     }
 
+    .skip-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .play-button {
+      width: 80px;
+      height: 80px;
+      background: var(--black);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .play-button:hover {
+      transform: scale(1.08);
+    }
+
     .play-button:active {
-      transform: scale(0.98);
+      transform: scale(0.95);
     }
 
     .play-button svg {
-      width: 24px;
-      height: 24px;
-      fill: var(--off-white);
+      width: 28px;
+      height: 28px;
+      fill: white;
     }
 
     .play-button svg.play-icon {
-      margin-left: 3px;
+      margin-left: 4px;
     }
 
+    /* Progress - Arc style like reference */
     .progress-container {
       width: 100%;
+      position: relative;
     }
 
     .progress-bar-wrapper {
-      position: relative;
-      height: 32px;
+      height: 40px;
       display: flex;
       align-items: center;
       cursor: pointer;
+      position: relative;
     }
 
     .progress-bar {
       width: 100%;
-      height: 3px;
-      background: var(--text-light);
+      height: 4px;
+      background: rgba(0,0,0,0.1);
       border-radius: 2px;
       position: relative;
     }
@@ -725,33 +635,31 @@
       left: 0;
       top: 0;
       height: 100%;
-      background: var(--text);
+      background: var(--black);
       border-radius: 2px;
-      transition: width 0.1s linear;
     }
 
     .progress-handle {
       position: absolute;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 12px;
-      height: 12px;
-      background: var(--text);
+      width: 16px;
+      height: 16px;
+      background: var(--black);
       border-radius: 50%;
-      opacity: 0;
-      transition: opacity 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.1s ease;
     }
 
     .progress-bar-wrapper:hover .progress-handle {
-      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.2);
     }
 
     .time-display {
       display: flex;
       justify-content: space-between;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--text-muted);
+      font-size: 12px;
+      color: rgba(0,0,0,0.4);
       font-variant-numeric: tabular-nums;
       margin-top: 8px;
     }
@@ -766,10 +674,10 @@
     }
 
     .spinner {
-      width: 24px;
-      height: 24px;
-      border: 2px solid var(--text-light);
-      border-top-color: var(--text);
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(0,0,0,0.1);
+      border-top-color: var(--black);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -779,58 +687,35 @@
     }
 
     .player-error {
-      background: rgba(224, 143, 106, 0.1);
-      padding: 16px 24px;
-      border-radius: 16px;
-      margin-top: 24px;
-      font-size: 13px;
       text-align: center;
+      margin-top: 24px;
+      font-size: 14px;
+      color: rgba(0,0,0,0.5);
     }
 
     .retry-btn {
-      background: var(--text);
+      background: var(--black);
       border: none;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border-radius: 100px;
-      color: var(--off-white);
-      font-size: 13px;
+      color: white;
+      font-size: 14px;
       font-weight: 500;
       cursor: pointer;
       margin-top: 12px;
       font-family: inherit;
     }
 
-    /* ==================== */
-    /* RESPONSIVE */
-    /* ==================== */
-    @media (max-width: 400px) {
-      .hero-title {
-        font-size: 36px;
-      }
-
-      .pillar-artwork {
-        height: 140px;
-      }
-
-      .player-artwork {
-        width: 220px;
-        height: 220px;
-      }
-    }
-
     /* Utilities */
     #audio-player { display: none; }
     [x-cloak] { display: none !important; }
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
+
+    @media (max-width: 400px) {
+      .hero-title h1 { font-size: 36px; }
+      .pillar-card { height: 180px; }
+      .pillar-title { font-size: 24px; }
+      .player-artwork { max-width: 280px; }
+      .player-title { font-size: 20px; }
     }
   </style>
 </head>
@@ -850,136 +735,181 @@
     @waiting="isLoading = true"
   ></audio>
 
-  <a href="#main-content" class="sr-only">Skip to main content</a>
-
   <!-- HOME VIEW -->
-  <div class="view app" :class="{ 'active': currentView === 'home' }" id="main-content">
-    <header class="header">
-      <div class="container">
-        <p class="brand">Nikolas Konstantin</p>
-      </div>
-    </header>
+  <div class="view home-view" :class="{ 'active': currentView === 'home' }">
+    <p class="brand">Nikolas Konstantin</p>
 
-    <main>
-      <div class="container">
-        <div class="hero">
-          <h1 class="hero-title">
-            <span>Beautiful</span>
-            <span>Mind</span>
-          </h1>
-          <p class="hero-subtitle">Meditations for clarity and calm</p>
+    <div class="hero-title">
+      <h1>Beautiful Mind</h1>
+      <p>Train your mind. Widen your bandwidth.</p>
+    </div>
+
+    <nav class="pillars">
+      <!-- Awareness Card -->
+      <button class="pillar-card" @click="openPillar('awareness')">
+        <div class="pillar-bg">
+          <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="awareness-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#2a4a5e"/>
+                <stop offset="100%" style="stop-color:#7FABC8"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="200" fill="url(#awareness-grad)"/>
+            <!-- Moon -->
+            <circle cx="320" cy="70" r="50" fill="#F7F3ED" opacity="0.9"/>
+            <!-- Ocean waves -->
+            <ellipse cx="200" cy="280" rx="350" ry="130" fill="#1a3a4a" opacity="0.4"/>
+            <ellipse cx="200" cy="300" rx="400" ry="150" fill="#1a3a4a" opacity="0.3"/>
+            <!-- Stars -->
+            <circle cx="80" cy="40" r="2" fill="#fff" opacity="0.6"/>
+            <circle cx="150" cy="60" r="1.5" fill="#fff" opacity="0.5"/>
+            <circle cx="200" cy="30" r="2" fill="#fff" opacity="0.7"/>
+            <circle cx="260" cy="50" r="1" fill="#fff" opacity="0.4"/>
+          </svg>
         </div>
+        <div class="pillar-overlay"></div>
+        <div class="pillar-content">
+          <p class="pillar-subtitle">Notice everything</p>
+          <h2 class="pillar-title">Awareness</h2>
+          <p class="pillar-count">7 sessions</p>
+        </div>
+      </button>
 
-        <nav class="pillars" aria-label="Meditation categories">
-          <!-- Awareness -->
-          <button class="pillar" @click="openPillar('awareness')">
-            <div class="pillar-artwork artwork-awareness">
-              <div class="sun"></div>
-              <div class="water"></div>
-              <div class="reflection"></div>
-            </div>
-            <div class="pillar-content">
-              <h2 class="pillar-name">Awareness</h2>
-              <div class="pillar-meta">
-                <span>Train your attention</span>
-                <span class="pillar-count">7 sessions</span>
-              </div>
-            </div>
-          </button>
+      <!-- Cultivation Card -->
+      <button class="pillar-card" @click="openPillar('cultivation')">
+        <div class="pillar-bg">
+          <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="cultivation-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#3d4a3c"/>
+                <stop offset="100%" style="stop-color:#A6BEA4"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="200" fill="url(#cultivation-grad)"/>
+            <!-- Sun -->
+            <circle cx="300" cy="80" r="45" fill="#C6A55B" opacity="0.9"/>
+            <!-- Mountains -->
+            <polygon points="-40,200 80,80 200,200" fill="#2d3a2c"/>
+            <polygon points="100,200 220,60 340,200" fill="#3a4839"/>
+            <polygon points="260,200 360,100 460,200" fill="#2d3a2c"/>
+            <!-- Birds -->
+            <path d="M60,50 Q75,40 90,50" stroke="#fff" stroke-width="2" fill="none" opacity="0.6"/>
+            <path d="M100,60 Q115,50 130,60" stroke="#fff" stroke-width="2" fill="none" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="pillar-overlay"></div>
+        <div class="pillar-content">
+          <p class="pillar-subtitle">Open your heart</p>
+          <h2 class="pillar-title">Cultivation</h2>
+          <p class="pillar-count">5 sessions</p>
+        </div>
+      </button>
 
-          <!-- Cultivation -->
-          <button class="pillar" @click="openPillar('cultivation')">
-            <div class="pillar-artwork artwork-cultivation">
-              <div class="sun"></div>
-              <div class="mountain-back"></div>
-              <div class="mountain-mid"></div>
-              <div class="mountain-front"></div>
-            </div>
-            <div class="pillar-content">
-              <h2 class="pillar-name">Cultivation</h2>
-              <div class="pillar-meta">
-                <span>Grow your heart</span>
-                <span class="pillar-count">5 sessions</span>
-              </div>
-            </div>
-          </button>
+      <!-- Self-Reflection Card -->
+      <button class="pillar-card" @click="openPillar('reflection')">
+        <div class="pillar-bg">
+          <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="reflection-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#4a4252"/>
+                <stop offset="50%" style="stop-color:#C7B9D3"/>
+                <stop offset="100%" style="stop-color:#d4cce0"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="200" fill="url(#reflection-grad)"/>
+            <!-- Setting sun -->
+            <circle cx="200" cy="100" r="55" fill="#E08F6A" opacity="0.85"/>
+            <!-- Horizon lines -->
+            <rect x="0" y="140" width="400" height="60" fill="#3a3342" opacity="0.3"/>
+            <!-- Sun reflection -->
+            <ellipse cx="200" cy="170" rx="40" ry="12" fill="#E08F6A" opacity="0.3"/>
+            <ellipse cx="200" cy="185" rx="25" ry="8" fill="#E08F6A" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="pillar-overlay"></div>
+        <div class="pillar-content">
+          <p class="pillar-subtitle">Know yourself</p>
+          <h2 class="pillar-title">Self-Reflection</h2>
+          <p class="pillar-count">3 sessions</p>
+        </div>
+      </button>
+    </nav>
 
-          <!-- Self-Reflection -->
-          <button class="pillar" @click="openPillar('reflection')">
-            <div class="pillar-artwork artwork-reflection">
-              <div class="moon"></div>
-              <div class="cloud cloud-1"></div>
-              <div class="cloud cloud-2"></div>
-              <div class="cloud cloud-3"></div>
-              <div class="hills"></div>
-            </div>
-            <div class="pillar-content">
-              <h2 class="pillar-name">Self-Reflection</h2>
-              <div class="pillar-meta">
-                <span>Know yourself</span>
-                <span class="pillar-count">3 sessions</span>
-              </div>
-            </div>
-          </button>
-        </nav>
-
-        <section class="foundations-section">
-          <p class="section-label">Foundations</p>
-          <div class="foundations-list">
-            <template x-for="(item, index) in foundations" :key="index">
-              <button 
-                class="foundation-btn" 
-                @click="playFoundation(index)"
-                x-text="item.title"
-              ></button>
-            </template>
-          </div>
-        </section>
+    <section class="foundations-section">
+      <p class="section-label">Foundations</p>
+      <div class="foundations-list">
+        <template x-for="(item, index) in foundations" :key="index">
+          <button class="foundation-btn" @click="playFoundation(index)" x-text="item.title"></button>
+        </template>
       </div>
-    </main>
-
-    <footer class="footer">
-      <p class="footer-text">Train your mind · Widen your bandwidth</p>
-    </footer>
+    </section>
   </div>
 
   <!-- LIST VIEW -->
-  <div class="view" :class="{ 'active': currentView === 'list' }">
-    <div class="container">
-      <header class="list-header">
-        <button class="back-btn" @click="goBack()" aria-label="Back">
-          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        </button>
-        <h2 class="list-title" x-text="currentPillar ? pillars[currentPillar].name : ''"></h2>
-      </header>
-
-      <!-- Mini artwork banner -->
-      <div class="list-artwork-small" :class="'artwork-' + currentPillar">
+  <div class="view list-view" :class="{ 'active': currentView === 'list' }">
+    <header class="list-header">
+      <div class="list-hero-image">
+        <!-- Dynamic hero based on pillar -->
         <template x-if="currentPillar === 'awareness'">
-          <div>
-            <div class="sun" style="width:50px;height:50px;top:20px;right:30%"></div>
-            <div class="water"></div>
-            <div class="reflection" style="width:40px;height:20px"></div>
-          </div>
+          <svg viewBox="0 0 400 280" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="list-awareness" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#1a3a4a"/>
+                <stop offset="100%" style="stop-color:#7FABC8"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="280" fill="url(#list-awareness)"/>
+            <circle cx="300" cy="100" r="60" fill="#F7F3ED" opacity="0.9"/>
+            <ellipse cx="200" cy="350" rx="400" ry="150" fill="#0d2530" opacity="0.5"/>
+            <circle cx="60" cy="50" r="2" fill="#fff" opacity="0.6"/>
+            <circle cx="120" cy="80" r="1.5" fill="#fff" opacity="0.5"/>
+            <circle cx="180" cy="40" r="2" fill="#fff" opacity="0.7"/>
+          </svg>
         </template>
         <template x-if="currentPillar === 'cultivation'">
-          <div>
-            <div class="sun" style="width:35px;height:35px;top:15px;left:25%"></div>
-            <div class="mountain-back" style="border-bottom-width:80px"></div>
-            <div class="mountain-mid" style="border-bottom-width:60px"></div>
-            <div class="mountain-front" style="border-bottom-width:70px"></div>
-          </div>
+          <svg viewBox="0 0 400 280" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="list-cultivation" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#2d3a2c"/>
+                <stop offset="100%" style="stop-color:#A6BEA4"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="280" fill="url(#list-cultivation)"/>
+            <circle cx="320" cy="90" r="55" fill="#C6A55B" opacity="0.9"/>
+            <polygon points="-60,280 100,100 260,280" fill="#1d2a1c"/>
+            <polygon points="120,280 280,70 440,280" fill="#263525"/>
+          </svg>
         </template>
         <template x-if="currentPillar === 'reflection'">
-          <div>
-            <div class="moon" style="width:40px;height:40px;top:20px;left:25%"></div>
-            <div class="cloud cloud-1"></div>
-            <div class="cloud cloud-2"></div>
-            <div class="hills"></div>
-          </div>
+          <svg viewBox="0 0 400 280" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="list-reflection" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#3a3342"/>
+                <stop offset="60%" style="stop-color:#C7B9D3"/>
+                <stop offset="100%" style="stop-color:#e0d8e8"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="280" fill="url(#list-reflection)"/>
+            <circle cx="200" cy="120" r="65" fill="#E08F6A" opacity="0.85"/>
+            <rect x="0" y="200" width="400" height="80" fill="#2a2432" opacity="0.25"/>
+            <ellipse cx="200" cy="240" rx="50" ry="15" fill="#E08F6A" opacity="0.25"/>
+          </svg>
         </template>
+        <div class="list-hero-overlay"></div>
       </div>
+      <button class="list-back-btn" @click="goBack()" aria-label="Back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+    </header>
 
+    <div class="list-title-section">
+      <p class="list-subtitle" x-text="currentPillar ? pillars[currentPillar].tagline : ''"></p>
+      <h2 class="list-title" x-text="currentPillar ? pillars[currentPillar].name : ''"></h2>
+      <p class="list-count" x-text="currentPillar ? pillars[currentPillar].meditations.length + ' guided sessions' : ''"></p>
+    </div>
+
+    <main class="list-main">
       <ul class="meditation-list">
         <template x-if="currentPillar">
           <template x-for="(meditation, index) in pillars[currentPillar].meditations" :key="index">
@@ -988,6 +918,7 @@
                 <span class="meditation-number" x-text="String(index + 1).padStart(2, '0')"></span>
                 <div class="meditation-info">
                   <p class="meditation-title" x-text="meditation.title"></p>
+                  <p class="meditation-subtitle" x-text="meditation.subtitle"></p>
                 </div>
                 <span class="meditation-duration" x-text="meditation.duration"></span>
               </button>
@@ -995,7 +926,7 @@
           </template>
         </template>
       </ul>
-    </div>
+    </main>
   </div>
 
   <!-- PLAYER VIEW -->
@@ -1005,45 +936,82 @@
         <button class="player-back-btn" @click="goBack()" aria-label="Close">
           <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         </button>
+        <div></div>
       </header>
 
       <div class="player-content">
-        <!-- Player artwork with same illustrations -->
-        <div class="player-artwork" :class="'artwork-' + playerArtworkClass">
+        <div class="player-artwork">
+          <!-- Dynamic artwork -->
           <template x-if="playerArtworkClass === 'awareness'">
-            <div>
-              <div class="sun"></div>
-              <div class="water"></div>
-              <div class="reflection"></div>
-            </div>
+            <svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="player-awareness" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#1a3a4a"/>
+                  <stop offset="100%" style="stop-color:#7FABC8"/>
+                </linearGradient>
+              </defs>
+              <rect width="320" height="320" fill="url(#player-awareness)"/>
+              <circle cx="220" cy="100" r="55" fill="#F7F3ED" opacity="0.9"/>
+              <ellipse cx="160" cy="380" rx="300" ry="120" fill="#0d2530" opacity="0.5"/>
+            </svg>
           </template>
           <template x-if="playerArtworkClass === 'cultivation'">
-            <div>
-              <div class="sun"></div>
-              <div class="mountain-back"></div>
-              <div class="mountain-mid"></div>
-              <div class="mountain-front"></div>
-            </div>
+            <svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="player-cultivation" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#2d3a2c"/>
+                  <stop offset="100%" style="stop-color:#A6BEA4"/>
+                </linearGradient>
+              </defs>
+              <rect width="320" height="320" fill="url(#player-cultivation)"/>
+              <circle cx="240" cy="100" r="50" fill="#C6A55B" opacity="0.9"/>
+              <polygon points="-40,320 80,160 200,320" fill="#1d2a1c"/>
+              <polygon points="100,320 200,120 300,320" fill="#263525"/>
+            </svg>
           </template>
           <template x-if="playerArtworkClass === 'reflection'">
-            <div>
-              <div class="moon"></div>
-              <div class="cloud cloud-1"></div>
-              <div class="cloud cloud-2"></div>
-              <div class="cloud cloud-3"></div>
-              <div class="hills"></div>
-            </div>
+            <svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="player-reflection" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:#3a3342"/>
+                  <stop offset="60%" style="stop-color:#C7B9D3"/>
+                  <stop offset="100%" style="stop-color:#e0d8e8"/>
+                </linearGradient>
+              </defs>
+              <rect width="320" height="320" fill="url(#player-reflection)"/>
+              <circle cx="160" cy="140" r="60" fill="#E08F6A" opacity="0.85"/>
+              <rect x="0" y="240" width="320" height="80" fill="#2a2432" opacity="0.25"/>
+            </svg>
           </template>
           <template x-if="playerArtworkClass === 'foundation'">
-            <div style="background:var(--yellow);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-              <div style="width:80px;height:80px;border:3px solid rgba(255,255,255,0.4);border-radius:50%;"></div>
-            </div>
+            <svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="player-foundation" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#a8914d"/>
+                  <stop offset="100%" style="stop-color:#C6A55B"/>
+                </linearGradient>
+              </defs>
+              <rect width="320" height="320" fill="url(#player-foundation)"/>
+              <circle cx="160" cy="140" r="55" fill="#E08F6A" opacity="0.8"/>
+              <rect x="0" y="220" width="320" height="100" fill="#8a7040" opacity="0.4"/>
+            </svg>
           </template>
+          <div class="player-artwork-overlay"></div>
         </div>
 
         <div class="player-info">
           <p class="player-pillar-name" x-text="playerPillarName"></p>
-          <h2 class="player-title" x-text="playerTitle"></h2>
+          <div class="player-title-wrapper">
+            <h2 class="player-title">
+              <span class="breathing-circle" x-show="isPlaying"></span>
+              <span x-text="playerTitle"></span>
+            </h2>
+            <div class="wave-line" x-show="isPlaying">
+              <svg viewBox="0 0 120 20">
+                <path class="wave-path" d="M0,10 Q30,10 60,10 T120,10"/>
+              </svg>
+            </div>
+          </div>
         </div>
 
         <div class="player-controls">
@@ -1053,12 +1021,15 @@
                 <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
               </svg>
             </button>
-
             <button class="play-button" @click="togglePlay()" :aria-label="isPlaying ? 'Pause' : 'Play'">
-              <svg x-show="!isPlaying" class="play-icon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-              <svg x-show="isPlaying" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              <svg x-show="!isPlaying" class="play-icon" viewBox="0 0 24 24">
+                <polygon points="5,3 19,12 5,21"/>
+              </svg>
+              <svg x-show="isPlaying" viewBox="0 0 24 24">
+                <rect x="6" y="4" width="4" height="16"/>
+                <rect x="14" y="4" width="4" height="16"/>
+              </svg>
             </button>
-
             <button class="skip-btn" @click="skip(15)" aria-label="Forward 15 seconds">
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/>
@@ -1067,11 +1038,11 @@
           </div>
 
           <div class="progress-container">
-            <div class="progress-bar-wrapper" @click="seek($event)" role="slider" tabindex="0" @keydown.left.prevent="skip(-5)" @keydown.right.prevent="skip(5)">
+            <div class="progress-bar-wrapper" @click="seek($event)">
               <div class="progress-bar">
-                <div class="progress-fill" :style="'width: ' + progress + '%'"></div>
+                <div class="progress-fill" :style="'width:' + progress + '%'"></div>
               </div>
-              <div class="progress-handle" :style="'left: ' + progress + '%'"></div>
+              <div class="progress-handle" :style="'left:' + progress + '%'"></div>
             </div>
             <div class="time-display">
               <span x-text="formatTime(currentTime)"></span>
@@ -1114,33 +1085,33 @@
             name: "Awareness",
             tagline: "Train your attention",
             meditations: [
-              { title: "Meditating with Images", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/nnb61f45d02mlrgmp2mn3/Awareness-Meditating-with-Images.m4a?rlkey=n7vw61bjc4t6v4yttq2xoft3w&raw=1" },
-              { title: "Wheel of Awareness", duration: "~20 min", url: "https://www.dropbox.com/scl/fi/fkko0qlsfjm9tyzgtx82z/Awareness-Wheel-of-Awareness.m4a?rlkey=vs60znllbzjeaok78io9fpvf5&raw=1" },
-              { title: "Big Sky Meditation", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/a8yieht19x1rrvyey9zbw/Awareness-Big-Sky-Meditation.m4a?rlkey=oy09vvx4bbjghhaniz0i2j78w&raw=1" },
-              { title: "Gentle Kind Awareness", duration: "~18 min", url: "https://www.dropbox.com/scl/fi/v8l0wcwb5l555k7qu5ayk/Awareness-Gentle-Kind-Awareness-Wheel-of-Awareness.m4a?rlkey=hmwsi23di85ovow18ilbam9e4&raw=1" },
-              { title: "Quality of Attention", duration: "~12 min", url: "https://www.dropbox.com/scl/fi/kkg8qur8ubl9xky00lf6b/Awareness-Quality-of-your-Attention.m4a?rlkey=uvv4qbg65yd7253ohu5uv8u5b&raw=1" },
-              { title: "Hafu Hafu", duration: "~10 min", url: "https://www.dropbox.com/scl/fi/4cfdrn6iyyap13hoizdqf/Awareness-Hafu-Hafu.m4a?rlkey=sz5bbdak2m4ypq7z79yo4er4o&raw=1" },
-              { title: "Being with the Difficult", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/9g2qbh0wk51rhpt048228/Awareness-Being-with-the-Difficult.m4a?rlkey=j3a5bmbis3wskg4bhlakxc0iu&raw=1" }
+              { title: "Meditating with Images", subtitle: "Visual focus practice", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/nnb61f45d02mlrgmp2mn3/Awareness-Meditating-with-Images.m4a?rlkey=n7vw61bjc4t6v4yttq2xoft3w&raw=1" },
+              { title: "Wheel of Awareness", subtitle: "Expand your perception", duration: "~20 min", url: "https://www.dropbox.com/scl/fi/fkko0qlsfjm9tyzgtx82z/Awareness-Wheel-of-Awareness.m4a?rlkey=vs60znllbzjeaok78io9fpvf5&raw=1" },
+              { title: "Big Sky Meditation", subtitle: "Spacious awareness", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/a8yieht19x1rrvyey9zbw/Awareness-Big-Sky-Meditation.m4a?rlkey=oy09vvx4bbjghhaniz0i2j78w&raw=1" },
+              { title: "Gentle Kind Awareness", subtitle: "Soft attention", duration: "~18 min", url: "https://www.dropbox.com/scl/fi/v8l0wcwb5l555k7qu5ayk/Awareness-Gentle-Kind-Awareness-Wheel-of-Awareness.m4a?rlkey=hmwsi23di85ovow18ilbam9e4&raw=1" },
+              { title: "Quality of Attention", subtitle: "Refine your focus", duration: "~12 min", url: "https://www.dropbox.com/scl/fi/kkg8qur8ubl9xky00lf6b/Awareness-Quality-of-your-Attention.m4a?rlkey=uvv4qbg65yd7253ohu5uv8u5b&raw=1" },
+              { title: "Hafu Hafu", subtitle: "Body sensation scan", duration: "~10 min", url: "https://www.dropbox.com/scl/fi/4cfdrn6iyyap13hoizdqf/Awareness-Hafu-Hafu.m4a?rlkey=sz5bbdak2m4ypq7z79yo4er4o&raw=1" },
+              { title: "Being with the Difficult", subtitle: "Embrace challenges", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/9g2qbh0wk51rhpt048228/Awareness-Being-with-the-Difficult.m4a?rlkey=j3a5bmbis3wskg4bhlakxc0iu&raw=1" }
             ]
           },
           cultivation: {
             name: "Cultivation",
-            tagline: "Grow your heart",
+            tagline: "Open your heart",
             meditations: [
-              { title: "Chakra System", duration: "~20 min", url: "https://www.dropbox.com/scl/fi/f1ekpp8ueh8id2tq6ypd0/Cultivation-Chakra-System.m4a?rlkey=9es9ww23aaufordfhiz2y2zvt&raw=1" },
-              { title: "Empathy vs Compassion", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/0bzarsw2855olsrqf8yz3/Cultivation-Empathy-vs-Compasssion.m4a?rlkey=seu04uc94ymwol9otfzpoewrr&raw=1" },
-              { title: "Tonglen", duration: "~18 min", url: "https://www.dropbox.com/scl/fi/flvp9s3245o6r8qgcpbuw/Cultivation-Tonglen.m4a?rlkey=6umaoomjfvgfmp1zfamp7nl1i&raw=1" },
-              { title: "Compassion Training", duration: "~20 min", url: "https://www.dropbox.com/scl/fi/nfd9wgx9b23xplniqb7xn/Cultivation-Compassion-training.m4a?rlkey=q2haoltiauof8ihxfy3nocsov&raw=1" },
-              { title: "Loving Kindness", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/nfd9wgx9b23xplniqb7xn/Cultivation-Compassion-training.m4a?rlkey=q2haoltiauof8ihxfy3nocsov&raw=1" }
+              { title: "Chakra System", subtitle: "Energy center journey", duration: "~20 min", url: "https://www.dropbox.com/scl/fi/f1ekpp8ueh8id2tq6ypd0/Cultivation-Chakra-System.m4a?rlkey=9es9ww23aaufordfhiz2y2zvt&raw=1" },
+              { title: "Empathy vs Compassion", subtitle: "Feel with wisdom", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/0bzarsw2855olsrqf8yz3/Cultivation-Empathy-vs-Compasssion.m4a?rlkey=seu04uc94ymwol9otfzpoewrr&raw=1" },
+              { title: "Tonglen", subtitle: "Give and receive", duration: "~18 min", url: "https://www.dropbox.com/scl/fi/flvp9s3245o6r8qgcpbuw/Cultivation-Tonglen.m4a?rlkey=6umaoomjfvgfmp1zfamp7nl1i&raw=1" },
+              { title: "Compassion Training", subtitle: "Strengthen kindness", duration: "~20 min", url: "https://www.dropbox.com/scl/fi/nfd9wgx9b23xplniqb7xn/Cultivation-Compassion-training.m4a?rlkey=q2haoltiauof8ihxfy3nocsov&raw=1" },
+              { title: "Loving Kindness", subtitle: "Radiate warmth", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/nfd9wgx9b23xplniqb7xn/Cultivation-Compassion-training.m4a?rlkey=q2haoltiauof8ihxfy3nocsov&raw=1" }
             ]
           },
           reflection: {
             name: "Self-Reflection",
-            tagline: "Know yourself",
+            tagline: "Know yourself deeply",
             meditations: [
-              { title: "Finding Meaning", duration: "~18 min", url: "https://www.dropbox.com/scl/fi/23st786n4hgcbq1b7ww1m/Self-Reflection-Finding-Meaning.m4a?rlkey=uwoo8hcgnyet24cch3ogoicog&raw=1" },
-              { title: "The Joy of Doing Nothing", duration: "~12 min", url: "https://www.dropbox.com/scl/fi/58lc8rt6svj38iz1omd2z/Self-Reflection-The-Joy-of-Doing-Nothing.m4a?rlkey=99w819fav4jjmlaunnww7agmv&raw=1" },
-              { title: "Being with What Is", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/uirxok6r46me130i4q4c1/Self-Reflection-Being-with-What-Is.m4a?rlkey=sticac56odm6ef23obxn9u2zi&raw=1" }
+              { title: "Finding Meaning", subtitle: "Discover your purpose", duration: "~18 min", url: "https://www.dropbox.com/scl/fi/23st786n4hgcbq1b7ww1m/Self-Reflection-Finding-Meaning.m4a?rlkey=uwoo8hcgnyet24cch3ogoicog&raw=1" },
+              { title: "The Joy of Doing Nothing", subtitle: "Rest in being", duration: "~12 min", url: "https://www.dropbox.com/scl/fi/58lc8rt6svj38iz1omd2z/Self-Reflection-The-Joy-of-Doing-Nothing.m4a?rlkey=99w819fav4jjmlaunnww7agmv&raw=1" },
+              { title: "Being with What Is", subtitle: "Accept the present", duration: "~15 min", url: "https://www.dropbox.com/scl/fi/uirxok6r46me130i4q4c1/Self-Reflection-Being-with-What-Is.m4a?rlkey=sticac56odm6ef23obxn9u2zi&raw=1" }
             ]
           }
         },
@@ -1163,7 +1134,8 @@
           document.addEventListener('touchstart', unlock);
           document.addEventListener('keydown', (e) => {
             if (this.currentView === 'player' && e.code === 'Space' && e.target.tagName !== 'BUTTON') {
-              e.preventDefault(); this.togglePlay();
+              e.preventDefault();
+              this.togglePlay();
             }
           });
         },
@@ -1175,32 +1147,31 @@
           else if (this.currentView === 'list') { this.currentPillar = null; this.currentView = 'home'; }
         },
 
-        playMeditation(pillarKey, index) {
-          const p = this.pillars[pillarKey], m = p.meditations[index];
-          this.currentPillar = pillarKey;
+        playMeditation(key, idx) {
+          const p = this.pillars[key], m = p.meditations[idx];
+          this.currentPillar = key;
           this.playerTitle = m.title;
           this.playerPillarName = p.name;
-          this.playerArtworkClass = pillarKey;
+          this.playerArtworkClass = key;
           this.currentAudioUrl = m.url;
           this.loadAndPlay(m.url);
           this.currentView = 'player';
         },
 
-        playFoundation(index) {
-          const item = this.foundations[index];
+        playFoundation(idx) {
+          const f = this.foundations[idx];
           this.currentPillar = null;
-          this.playerTitle = item.title;
+          this.playerTitle = f.title;
           this.playerPillarName = 'Foundation';
           this.playerArtworkClass = 'foundation';
-          this.currentAudioUrl = item.url;
-          this.loadAndPlay(item.url);
+          this.currentAudioUrl = f.url;
+          this.loadAndPlay(f.url);
           this.currentView = 'player';
         },
 
         loadAndPlay(url) {
           const a = this.$refs.audio;
-          this.error = null; this.isLoading = true;
-          this.currentTime = 0; this.duration = 0; this.progress = 0;
+          this.error = null; this.isLoading = true; this.currentTime = 0; this.duration = 0; this.progress = 0;
           a.src = url; a.load();
           a.play().then(() => { this.isPlaying = true; this.updateMediaSession(); }).catch(() => { this.isLoading = false; });
         },
