@@ -3,9 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <!-- PWA / Home Screen -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Beautiful Mind — Nikolas Konstantin</title>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Beautiful Mind">
+  <meta name="application-name" content="Beautiful Mind">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#F7F3ED">
+  <meta name="description" content="Meditations for clarity and calm by Nikolas Konstantin">
+  
+  <title>Beautiful Mind</title>
+  
+  <!-- Favicon - Ensō circle in brand blue -->
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAEmklEQVR4nNWWS28bVRTHzznz9PiR1HYaJzQkFJcqrQoIWKUPFixAtLBiwQfgS7GuhFggIaQigYoERUK0Ka82KpGKaJLWdZM0icdOPJ7HveewmMSJHTfJgiJxVzNXd87vnv//3LkHO5vr8DwHPdfo/wXAPOI6ERCQ7isCIv5LABYhRNskgwAAu5NKC4sc+OlhABFABM82w0TXGp3VzajZUYjgmlQZcotZy7OMQwnPBLCIYxpKy+1Ff3Zxo9YIw0RrFgAwCEVg5uXiR2+ORwkfrNVgAIu4llH3w2t3l++vtgnhxaJXKTjlvE2ArTBZXAumx/JHcWEAgAVcy6g1wqs3H61vRdNj+fPV0lTJy1i046zESjRLpA7Z/gCACNgm1f3w6s1HG+340ivly+dGTaJI6U6iu8sIe6oodQsB9lvSfw4QQWu5dndlfSu+dKr04WsVZukkKg1KiIRAvdsWAMtAAFAs+xPqAaTSzz1u/rW6NT2We//caKKYYSeiMCACGSAMOwUqAiah30k+/XHx2z+f2ib1le4uQAAIsZPoWws+IVyolkxCLdDdE7lZSWLutNHJgGFsMxAAQDOst5M7j5rLzcgycC9ijwcClkm1RqfmdyaK3mTJixTTbnjavPVNcO+mqMSZmi7MXEEnA6wRMNE8WnBenyjcuL/2YK09NuTGWnUt6pGICFc3ozDRlYKTsQxOd8JMTqb92/fNH77QQUviKPjjhv/d50jGXk/Hh1wEXGlFB0gkCNDsKM1SztmIqWwChsFBK7j3s+EVkExApPyx6OF8XF9AywFhBGSRUtY2DfQDxSK4q+v+Kkpn91YDomgtSgESiAAIAAKzJBHsWZaKuf9U9ANciwjR7yQ7mSJoTblhd+qMDppABGRwsGmWxuzxk5LEgNhNnVkyNvUxdk1OM60UXNuklVaUaN7OFEFUnJ+5rIPNaGkehK3jJ4bf+RgtOwUACCAut0LFUim4RCkS+wGAoLSM5O2RnPNwI3jSDE8cy8SKERG0RscrfvBJXF8QFdljL6HlphIJgIEURHp+eSvrmBPFjOZneIAAirmQsd6YHGrHenaxYRBuXzKIoJUksf3CSWfqDKDRNYBZHJvmHjfrfnh6NDdZ8uLeH1SPB4gYK35rcnh8yP1l0b/1oOE5JotIykCUOJKok2oCAJol65hLa8H1+ae2SeerxX4H+gFpEq753tlRIvzq7pPZBw3PsQxEFmERARSg9BkBsq65tB58NltrtJOLp0rVkVy473rA/W0LC2Qs4/ZS48vfnwDAhWpp5uSxYc9CxPSOJAQAbEdq7nHr+vzTRhC/fap85dVKorl//wMBKcOzjV+X/K/nljeCpJyzpyv58WG3nLPTilxpRfPLm3U/tE26WC29e/Z4olkGnYPBAABgkYxtrLbin/5ev1Nr+UGCAKaBCKAZFHPWMU+P5s5Xi9WRXKT0wOgHAVKGbZBpUL0ZLqy1V1qRHyQImLGpMuRODGemyh4ihImmZ19sBwFgpx1KMSLCO0VLhKwlUpy+HjAO6YsQAQETLbFWe0OlZ/UovdeROrsU0zMzWPAB4//f/P4Dwshx7NK397IAAAAASUVORK5CYII=">
+  
+  <!-- Apple Touch Icon - 180x180 -->
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAFCklEQVR4nO3dvXXcVhCG4aGPe3AF6kWFuAgljpywCBfCXliBA0UKlDq4Pnv2aDnLi587883gfVJRFPbixQBYgquXnz++G/CR37I3ALqIAy7igIs44CIOuIgDLuKAizjgIg64iAMu4oCLOOAiDriIAy7igIs44CIOuIgDLuKAizjgIg64iAMu4oCLOOAiDriIAy7igIs44CIOuIgDrt+zNyDN69v7/Bd/+/pl3ZbIernI53NsSmHGFXJpHsfpTTxqXEnDOAKC8DQLpdU1R2IWLTWJQyGLZmPDGsShkEVXheMgi9VKxiGYRb9zipWLQzCLxiq9fU4ZwcpMjhVlTJ4LPv2nW55TrEQcZ2Wxexc+/sWLzDD1d0iP74alh/Xr23vXsWHicRwpo/E+C6N7WtldBlmcRTSOfWWQxbkU49hRBlmsIBfH1jLIYh2tN8EoQ4pQHJShRuW0wuO+giQmB2Voyo+DMmTlxzGPMoIlxzE/NigjXmYclCEuLQ7K0Kd+zUEZiXLimBwblJFLfXLAzF7f3lOePUt42IexMe+XtQpeE9HJQRkm8KRq9OSYecGU8WSVIhdH5QdvGNKnxb3Q0wpj47jIekSvOaAgLg7GxoyZFQgbHkwOuILiYGzM0xkeTA64VOJgbNwTWQ3e57B///nL+6M//vw7ckvURMQh9cbOvSdZ3H+BZiIBv+AvMTnip+inWTx+cXAi375+ST+oJOKItCmLx7+oOUUWWX5Bmp7/vd1lnPgdTrR6bfPvVsLOKWft17A+0u9Z8uOIce4elZof61wijhX78gp9XCIO7NM/jnWHePvhsTYOqVuVlpaucPLkWH1BvvrgXv39c29Y+p9WsFvnOGKuCRpfeXSOAwcRB1zEARdxwEUccBEHXMQBF3HA1TmOmEf6Gj842DkOHFTmQ2r3WX1Yr/7+uT/WXhtH+lOQ7S1d4f6nlXUHd+OrjaF/HNjtEnGsOMTbjw27SBx29r68QhmmEEfYBflZezSsjPQncJfHIXXDcny/Ss2MS/yWfaSxd3c82yeVRQyJOAI+auIXmxJJySL9nGIxcSh81MSHPk1EeVoEHE4SkyOXcgG58u9WBs3RkkVkNVTigKCgOHQ+eFWfzgf6MjngiouD4TFDZ2wYkwNPhMbB8HhOamwYkwNPRMfB8PCojQ2TnRxX60Pz9SbEMZm/5nqtIPu/MItODijIiYPhcSM7Nkx/cvTuQ/zVpcUxfyiIr+Bu868r61HLzMlx5T70y7D008o1+yhRhqXHsUmPPgq9ivw4Nh0chVb2Q5u2P/23OvLjsMv0UasMM3v5+eN79jb8b+teV1i+SUVfmsTkGLauSJURUrQMk4rDOvZRtwyTOq3c7NjlUms6NHgVinHY3pEgsrilN/6eaBx24JSRuMoVt/kJ3Tjs2CVF8HIX2tR50nHYGZecS5defPMOUo/DzrslOXE3CG7SCgXiGFbctSY+cySexVAmDqvwrsakEmWY2ptgz1VZ0+cKvYpKk+Om6AgplMVQMo6hUCLlshgKxzGIJ1I0i6F8HINgIqWzGJrEMYgk0iCLoVUcQ2IibbIYGsZxLyCUZkHcax7HzemVNG7i5ipxPCr3uG+868aBT1V6+xzBiAMu4oCLOOAiDriIAy7igIs44CIOuIgDLuKAizjgIg64iAMu4oCLOOAiDriIAy7igIs44CIOuIgDLuKAizjgIg64iAMu4oCLOOAiDrj+A+EH8l/UIKY3AAAAAElFTkSuQmCC">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
