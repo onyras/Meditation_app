@@ -74,6 +74,26 @@
     .dot:nth-child(18) { left: 42%; animation-delay: -13s; background: var(--lilac); }
     .dot:nth-child(19) { left: 56%; animation-delay: -21s; background: var(--orange); }
     .dot:nth-child(20) { left: 91%; animation-delay: -9s; background: var(--green); }
+    .dot:nth-child(21) { left: 5%; animation-delay: -1s; background: var(--blue); }
+    .dot:nth-child(22) { left: 12%; animation-delay: -15s; background: var(--lilac); }
+    .dot:nth-child(23) { left: 19%; animation-delay: -27s; background: var(--orange); }
+    .dot:nth-child(24) { left: 26%; animation-delay: -5s; background: var(--green); }
+    .dot:nth-child(25) { left: 33%; animation-delay: -23s; background: var(--blue); }
+    .dot:nth-child(26) { left: 40%; animation-delay: -17s; background: var(--lilac); }
+    .dot:nth-child(27) { left: 47%; animation-delay: -29s; background: var(--orange); }
+    .dot:nth-child(28) { left: 54%; animation-delay: -8s; background: var(--green); }
+    .dot:nth-child(29) { left: 61%; animation-delay: -31s; background: var(--blue); }
+    .dot:nth-child(30) { left: 68%; animation-delay: -12s; background: var(--lilac); }
+    .dot:nth-child(31) { left: 75%; animation-delay: -26s; background: var(--orange); }
+    .dot:nth-child(32) { left: 82%; animation-delay: -3s; background: var(--green); }
+    .dot:nth-child(33) { left: 89%; animation-delay: -20s; background: var(--blue); }
+    .dot:nth-child(34) { left: 96%; animation-delay: -33s; background: var(--lilac); }
+    .dot:nth-child(35) { left: 2%; animation-delay: -24s; background: var(--orange); }
+    .dot:nth-child(36) { left: 22%; animation-delay: -30s; background: var(--green); }
+    .dot:nth-child(37) { left: 35%; animation-delay: -11s; background: var(--blue); }
+    .dot:nth-child(38) { left: 50%; animation-delay: -28s; background: var(--lilac); }
+    .dot:nth-child(39) { left: 63%; animation-delay: -16s; background: var(--orange); }
+    .dot:nth-child(40) { left: 78%; animation-delay: -34s; background: var(--green); }
     @keyframes floatDot {
       0% { bottom: -10px; opacity: 0; transform: translateX(0) scale(1); }
       5% { opacity: 0.35; }
@@ -605,6 +625,26 @@
     <div class="dot"></div>
     <div class="dot"></div>
     <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
   </div>
 
   <!-- LOGIN -->
@@ -1040,8 +1080,8 @@
         isAuthenticated: false,
         accessCode: '',
         loginError: '',
-        // Valid access codes (change these annually)
-        validCodes: ['MIND2025', 'BEAUTIFUL2025'],
+        // Valid access codes (year in code must match current year)
+        validCodes: ['MIND', 'BEAUTIFUL'],
         
         // App state
         view: 'home',
@@ -1066,29 +1106,29 @@
             meditations: [
               { title: "Meditating with Images", subtitle: "Visual focus practice", duration: "~15 min", icon: "image", url: "https://www.dropbox.com/scl/fi/nnb61f45d02mlrgmp2mn3/Awareness-Meditating-with-Images.m4a?rlkey=n7vw61bjc4t6v4yttq2xoft3w&raw=1" },
               { title: "Wheel of Awareness", subtitle: "Expand your perception", duration: "~20 min", icon: "wheel", url: "https://www.dropbox.com/scl/fi/fkko0qlsfjm9tyzgtx82z/Awareness-Wheel-of-Awareness.m4a?rlkey=vs60znllbzjeaok78io9fpvf5&raw=1" },
-              { title: "Big Sky Meditation", subtitle: "Spacious awareness", duration: "~15 min", icon: "sky", url: "https://www.dropbox.com/scl/fi/a8yieht19x1rrvyey9zbw/Awareness-Big-Sky-Meditation.m4a?rlkey=oy09vvx4bbjghhaniz0i2j78w&raw=1" },
-              { title: "Gentle Kind Awareness", subtitle: "Soft attention", duration: "~18 min", icon: "leaf", url: "https://www.dropbox.com/scl/fi/v8l0wcwb5l555k7qu5ayk/Awareness-Gentle-Kind-Awareness-Wheel-of-Awareness.m4a?rlkey=hmwsi23di85ovow18ilbam9e4&raw=1" },
-              { title: "Quality of Attention", subtitle: "Refine your focus", duration: "~12 min", icon: "diamond", url: "https://www.dropbox.com/scl/fi/kkg8qur8ubl9xky00lf6b/Awareness-Quality-of-your-Attention.m4a?rlkey=uvv4qbg65yd7253ohu5uv8u5b&raw=1" },
-              { title: "Hafu Hafu", subtitle: "Body sensation scan", duration: "~10 min", icon: "body", url: "https://www.dropbox.com/scl/fi/4cfdrn6iyyap13hoizdqf/Awareness-Hafu-Hafu.m4a?rlkey=sz5bbdak2m4ypq7z79yo4er4o&raw=1" },
-              { title: "Being with the Difficult", subtitle: "Embrace challenges", duration: "~15 min", icon: "mountain", url: "https://www.dropbox.com/scl/fi/9g2qbh0wk51rhpt048228/Awareness-Being-with-the-Difficult.m4a?rlkey=j3a5bmbis3wskg4bhlakxc0iu&raw=1" }
+              { title: "Big Sky Meditation", subtitle: "Spacious awareness", duration: "~20 min", icon: "sky", url: "https://www.dropbox.com/scl/fi/a8yieht19x1rrvyey9zbw/Awareness-Big-Sky-Meditation.m4a?rlkey=oy09vvx4bbjghhaniz0i2j78w&raw=1" },
+              { title: "Gentle Kind Awareness", subtitle: "Soft attention", duration: "~25 min", icon: "leaf", url: "https://www.dropbox.com/scl/fi/v8l0wcwb5l555k7qu5ayk/Awareness-Gentle-Kind-Awareness-Wheel-of-Awareness.m4a?rlkey=hmwsi23di85ovow18ilbam9e4&raw=1" },
+              { title: "Quality of Attention", subtitle: "Refine your focus", duration: "~18 min", icon: "diamond", url: "https://www.dropbox.com/scl/fi/kkg8qur8ubl9xky00lf6b/Awareness-Quality-of-your-Attention.m4a?rlkey=uvv4qbg65yd7253ohu5uv8u5b&raw=1" },
+              { title: "Hafu Hafu", subtitle: "Body sensation scan", duration: "~22 min", icon: "body", url: "https://www.dropbox.com/scl/fi/4cfdrn6iyyap13hoizdqf/Awareness-Hafu-Hafu.m4a?rlkey=sz5bbdak2m4ypq7z79yo4er4o&raw=1" },
+              { title: "Being with the Difficult", subtitle: "Embrace challenges", duration: "~24 min", icon: "mountain", url: "https://www.dropbox.com/scl/fi/9g2qbh0wk51rhpt048228/Awareness-Being-with-the-Difficult.m4a?rlkey=j3a5bmbis3wskg4bhlakxc0iu&raw=1" }
             ]
           },
           cultivation: {
             name: "Cultivation", tagline: "Open your heart",
             meditations: [
-              { title: "Chakra System", subtitle: "Energy center journey", duration: "~20 min", icon: "chakra", url: "https://www.dropbox.com/scl/fi/f1ekpp8ueh8id2tq6ypd0/Cultivation-Chakra-System.m4a?rlkey=9es9ww23aaufordfhiz2y2zvt&raw=1" },
-              { title: "Empathy vs Compassion", subtitle: "Feel with wisdom", duration: "~15 min", icon: "hands", url: "https://www.dropbox.com/scl/fi/0bzarsw2855olsrqf8yz3/Cultivation-Empathy-vs-Compasssion.m4a?rlkey=seu04uc94ymwol9otfzpoewrr&raw=1" },
-              { title: "Tonglen", subtitle: "Give and receive", duration: "~18 min", icon: "exchange", url: "https://www.dropbox.com/scl/fi/flvp9s3245o6r8qgcpbuw/Cultivation-Tonglen.m4a?rlkey=6umaoomjfvgfmp1zfamp7nl1i&raw=1" },
+              { title: "Chakra System", subtitle: "Energy center journey", duration: "~13 min", icon: "chakra", url: "https://www.dropbox.com/scl/fi/f1ekpp8ueh8id2tq6ypd0/Cultivation-Chakra-System.m4a?rlkey=9es9ww23aaufordfhiz2y2zvt&raw=1" },
+              { title: "Empathy vs Compassion", subtitle: "Feel with wisdom", duration: "~24 min", icon: "hands", url: "https://www.dropbox.com/scl/fi/0bzarsw2855olsrqf8yz3/Cultivation-Empathy-vs-Compasssion.m4a?rlkey=seu04uc94ymwol9otfzpoewrr&raw=1" },
+              { title: "Tonglen", subtitle: "Give and receive", duration: "~20 min", icon: "exchange", url: "https://www.dropbox.com/scl/fi/flvp9s3245o6r8qgcpbuw/Cultivation-Tonglen.m4a?rlkey=6umaoomjfvgfmp1zfamp7nl1i&raw=1" },
               { title: "Compassion Training", subtitle: "Strengthen kindness", duration: "~20 min", icon: "heart", url: "https://www.dropbox.com/scl/fi/nfd9wgx9b23xplniqb7xn/Cultivation-Compassion-training.m4a?rlkey=q2haoltiauof8ihxfy3nocsov&raw=1" },
-              { title: "Loving Kindness", subtitle: "Radiate warmth", duration: "~15 min", icon: "radiate", url: "https://www.dropbox.com/scl/fi/nfd9wgx9b23xplniqb7xn/Cultivation-Compassion-training.m4a?rlkey=q2haoltiauof8ihxfy3nocsov&raw=1" }
+              { title: "Loving Kindness", subtitle: "Radiate warmth", duration: "~20 min", icon: "radiate", url: "https://www.dropbox.com/scl/fi/9ye30ujhqz8dar2y7mq2o/Cultivation-Loving-Kindness.m4a?rlkey=max72rgi6vs96yrg23zlsqd7d&raw=1" }
             ]
           },
           reflection: {
             name: "Self-Reflection", tagline: "Know yourself deeply",
             meditations: [
-              { title: "Finding Meaning", subtitle: "Discover your purpose", duration: "~18 min", icon: "compass", url: "https://www.dropbox.com/scl/fi/23st786n4hgcbq1b7ww1m/Self-Reflection-Finding-Meaning.m4a?rlkey=uwoo8hcgnyet24cch3ogoicog&raw=1" },
-              { title: "The Joy of Doing Nothing", subtitle: "Rest in being", duration: "~12 min", icon: "lotus", url: "https://www.dropbox.com/scl/fi/58lc8rt6svj38iz1omd2z/Self-Reflection-The-Joy-of-Doing-Nothing.m4a?rlkey=99w819fav4jjmlaunnww7agmv&raw=1" },
-              { title: "Being with What Is", subtitle: "Accept the present", duration: "~15 min", icon: "present", url: "https://www.dropbox.com/scl/fi/uirxok6r46me130i4q4c1/Self-Reflection-Being-with-What-Is.m4a?rlkey=sticac56odm6ef23obxn9u2zi&raw=1" }
+              { title: "Finding Meaning", subtitle: "Discover your purpose", duration: "~16 min", icon: "compass", url: "https://www.dropbox.com/scl/fi/23st786n4hgcbq1b7ww1m/Self-Reflection-Finding-Meaning.m4a?rlkey=uwoo8hcgnyet24cch3ogoicog&raw=1" },
+              { title: "The Joy of Doing Nothing", subtitle: "Rest in being", duration: "~18 min", icon: "lotus", url: "https://www.dropbox.com/scl/fi/58lc8rt6svj38iz1omd2z/Self-Reflection-The-Joy-of-Doing-Nothing.m4a?rlkey=99w819fav4jjmlaunnww7agmv&raw=1" },
+              { title: "Being with What Is", subtitle: "Accept the present", duration: "~20 min", icon: "present", url: "https://www.dropbox.com/scl/fi/uirxok6r46me130i4q4c1/Self-Reflection-Being-with-What-Is.m4a?rlkey=sticac56odm6ef23obxn9u2zi&raw=1" }
             ]
           }
         },
@@ -1132,8 +1172,14 @@
 
         attemptLogin() {
           const code = this.accessCode.trim().toUpperCase();
+          const currentYear = new Date().getFullYear().toString();
           
-          if (this.validCodes.includes(code)) {
+          // Check if code matches pattern: BASECODE + YEAR (e.g., MIND2025)
+          const isValid = this.validCodes.some(base => {
+            return code === base + currentYear;
+          });
+          
+          if (isValid) {
             // Store auth with expiry at end of current year
             const expiry = new Date();
             expiry.setMonth(11, 31); // December 31
